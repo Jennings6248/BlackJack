@@ -1,5 +1,5 @@
 # BlackJack
-![BlackJack wireframe](./images/84727560_10223153515653270_5868593607597883392_n.jpg)
+![BlackJack wireframe](./images/84622717_10223153617735822_3536704834369486848_n.jpg)
 
 ```1. Initialize state variables
   1.1 Make empty arrays for My cards and dealer cards
