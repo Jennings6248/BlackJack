@@ -61,12 +61,81 @@ suits.forEach(function(suit) {
   })
 })
 
-const heartsOfTwo = {
-  suit: HEARTS,
-  rank: THREE,
+playerCards.push(deckOfCards[0])
+playerCards.push(deckOfCards[1])
+
+dealerCards.push(deckOfCards[2])
+dealerCards.push(deckOfCards[3])
+
+console.log(dealerCards)
+console.log(playerCards)
+
+console.log(playerCards[0].rank)
+
+const rankToNumber = function(cardRank) {
+  const rankedValue = ranks.map(function(rank) {
+    if (rank === TWO) {
+      return 2
+    } else if (rank === THREE) {
+      return 3
+    } else if (rank === FOUR) {
+      return 4
+    } else if (rank === FIVE) {
+      return 5
+    } else if (rank === SIX) {
+      return 6
+    } else if (rank === SEVEN) {
+      return 7
+    } else if (rank === EIGHT) {
+      return 8
+    } else if (rank === NINE) {
+      return 9
+    } else if (rank === TEN) {
+      return 10
+    } else if (rank === JACK) {
+      return 10
+    } else if (rank === QUEEN) {
+      return 10
+    } else if (rank === KING) {
+      return 10
+    } else if (rank === ACE) {
+      return 11
+    }
+  })
+  console.log(rankedValue)
+  const indexOfRank = ranks.findIndex(function(rank) {
+    return rank === cardRank
+  })
+  console.log('findIndex:', indexOfRank)
+  return rankedValue[indexOfRank]
 }
 
-// const nineOfHearts = {
-//     suit: suits[0],
-//     rank: ranks[8]
-// }
+console.log(rankToNumber(EIGHT)) //8
+console.log(rankToNumber(JACK)) /// 10
+
+const sumRankToNumber = function(num1, num2) {
+  return num1 + num2
+}
+
+console.log(sumRankToNumber(rankToNumber(EIGHT), rankToNumber(JACK)))
+
+const yourScoreValue = function() {
+  //return playerCards[0].rank + playerCards[1].rank
+  return rankToNumber(playerCards[0].rank) + rankToNumber(playerCards[1].rank)
+ 
+}
+
+const dealerScoreValue = function() {
+  return rankToNumber(dealerCards[0].rank) + rankToNumber(dealerCards[1].rank)
+}
+
+console.log(yourScoreValue())
+
+const render = function() {
+  const playerMessageClass = document.querySelector('.player-score')
+  const dealerMessageClass = document.querySelector('.dealer-score')
+
+  playerMessageClass.textContent = `Your score: ${yourScoreValue()}`
+  dealerMessageClass.textContent = `Dealer score: ${dealerScoreValue()}`
+}
+render()
