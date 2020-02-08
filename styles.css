@@ -1,0 +1,89 @@
+html {
+  background-image: repeating-linear-gradient(
+      120deg,
+      rgba(255, 255, 255, 0.1) 0,
+      rgba(255, 255, 255, 0.1) 0.5px,
+      transparent 0,
+      transparent 59.5px,
+      rgba(255, 255, 255, 0.1) 0,
+      rgba(255, 255, 255, 0.1) 60px
+    ),
+    repeating-linear-gradient(
+      60deg,
+      rgba(255, 255, 255, 0.1) 0,
+      rgba(255, 255, 255, 0.1) 0.5px,
+      transparent 0,
+      transparent 59.5px,
+      rgba(255, 255, 255, 0.1) 0,
+      rgba(255, 255, 255, 0.1) 60px
+    ),
+    linear-gradient(
+      60deg,
+      rgba(0, 0, 0, 0.1) 25%,
+      transparent 0,
+      transparent 75%,
+      rgba(0, 0, 0, 0.1) 0
+    ),
+    linear-gradient(
+      120deg,
+      rgba(0, 0, 0, 0.1) 25%,
+      transparent 0,
+      transparent 75%,
+      rgba(0, 0, 0, 0.1) 0
+    );
+  background-color: #357d31;
+  background-size: 70px 120px;
+}
+
+.title {
+  font-size: 55px;
+  font-family: 'Anton', sans-serif;
+}
+
+.heading-container {
+  display: flex;
+  justify-content: center;
+}
+
+.row-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.player-container {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.score {
+  font-family: 'Anton', sans-serif;
+  font-size: 50px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+}
+
+.btn {
+  font-family: 'Anton', sans-serif;
+  font-size: 25px;
+  width: 100px;
+  height: 40px;
+  margin-right: auto;
+  margin-left: auto;
+  border-radius: 20px;
+  outline: none;
+  background-color: #3f3f3f;
+  color: #eee;
+}
+
+.cards-container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.btn:hover {
+  cursor: pointer;
+}
