@@ -15,7 +15,7 @@ const CLUBS = 'clubs'
 
 const suits = [HEARTS, SPADES, DIAMONDS, CLUBS]
 
-const TWO = 'two'
+const TWO = 'r02'
 const THREE = 'three'
 const FOUR = 'four'
 const FIVE = 'five'
@@ -57,7 +57,7 @@ suits.forEach(function(suit) {
     }
 
     deckOfCards.push(cardObject)
-    console.log(deckOfCards)
+    //console.log(deckOfCards)
   })
 })
 
@@ -67,8 +67,8 @@ playerCards.push(deckOfCards[1])
 dealerCards.push(deckOfCards[2])
 dealerCards.push(deckOfCards[3])
 
-console.log(dealerCards)
-console.log(playerCards)
+//console.log(dealerCards)
+//console.log(playerCards)
 
 console.log(playerCards[0].rank)
 
@@ -117,12 +117,10 @@ const sumRankToNumber = function(num1, num2) {
   return num1 + num2
 }
 
-console.log(sumRankToNumber(rankToNumber(EIGHT), rankToNumber(JACK)))
+//console.log(sumRankToNumber(rankToNumber(EIGHT), rankToNumber(JACK)))
 
 const yourScoreValue = function() {
-  //return playerCards[0].rank + playerCards[1].rank
   return rankToNumber(playerCards[0].rank) + rankToNumber(playerCards[1].rank)
- 
 }
 
 const dealerScoreValue = function() {
@@ -137,5 +135,21 @@ const render = function() {
 
   playerMessageClass.textContent = `Your score: ${yourScoreValue()}`
   dealerMessageClass.textContent = `Dealer score: ${dealerScoreValue()}`
+  const cardContainer = document.querySelector('.cards-container')
+  const image1 = document.createElement('div')
+  image1.setAttribute('class', 'card hearts r02')
+  cardContainer.appendChild(image1)
+
+  const image2 = document.createElement('div')
+  image2.setAttribute('class', 'card hearts r03')
+  cardContainer.appendChild(image2)
+
+  const image3 = document.createElement('div')
+  image3.setAttribute('class', 'card hearts r04')
+  cardContainer.appendChild(image3)
+
+  const image4 = document.createElement('div')
+  image4.setAttribute('class', 'card hearts r05')
+  cardContainer.appendChild(image4)
 }
 render()
