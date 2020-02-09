@@ -5,8 +5,9 @@ const YOUR_TURN = 'your turn'
 const DEALER_TURN = 'dealer turn'
 const PLAYER_WON = 'player won'
 const DEALER_WON = 'dealer won'
+const TIE = 'tie'
 
-const gameState = YOUR_TURN
+let gameState = YOUR_TURN
 
 const HEARTS = 'hearts'
 const SPADES = 'spades'
@@ -68,9 +69,10 @@ dealerCards.push(deckOfCards[2])
 dealerCards.push(deckOfCards[3])
 
 //console.log(dealerCards)
-//console.log(playerCards)
+// console.log(playerCards)
+// console.log(dealerCards)
 
-console.log(playerCards[0].rank)
+// console.log(playerCards[0].rank)
 
 const rankToNumber = function(cardRank) {
   const rankedValue = ranks.map(function(rank) {
@@ -102,16 +104,16 @@ const rankToNumber = function(cardRank) {
       return 11
     }
   })
-  console.log(rankedValue)
+  //console.log(rankedValue)
   const indexOfRank = ranks.findIndex(function(rank) {
     return rank === cardRank
   })
-  console.log('findIndex:', indexOfRank)
+  //console.log('findIndex:', indexOfRank)
   return rankedValue[indexOfRank]
 }
 
-console.log(rankToNumber(EIGHT)) //8
-console.log(rankToNumber(JACK)) /// 10
+// console.log(rankToNumber(EIGHT)) //8
+// console.log(rankToNumber(JACK)) /// 10
 
 const sumRankToNumber = function(num1, num2) {
   return num1 + num2
@@ -120,21 +122,41 @@ const sumRankToNumber = function(num1, num2) {
 //console.log(sumRankToNumber(rankToNumber(EIGHT), rankToNumber(JACK)))
 
 const yourScoreValue = function() {
-  return rankToNumber(playerCards[0].rank) + rankToNumber(playerCards[1].rank)
+  const playerSum = playerCards.reduce(function(total, card) {
+    return total + rankToNumber(card.rank)
+  }, 0)
+  console.log(playerCards)
+  console.log(playerSum)
+
+  return playerSum
 }
 
 const dealerScoreValue = function() {
-  return rankToNumber(dealerCards[0].rank) + rankToNumber(dealerCards[1].rank)
+  const dealerSum = dealerCards.reduce(function(total, card) {
+    return total + rankToNumber(card.rank)
+  }, 0)
+
+  return dealerSum
 }
 
-console.log(yourScoreValue())
+//console.log(yourScoreValue())
+
+const youLose = function() {
+  if (yourScoreValue() > 21) {
+    return (playerMessageClass.textContent = 'You bust!')
+  }
+}
 
 const render = function() {
-  const playerMessageClass = document.querySelector('.player-score')
-  const dealerMessageClass = document.querySelector('.dealer-score')
+  const playerScoreElement = document.querySelector('.player-score')
+  const dealerScoreElement = document.querySelector('.dealer-score')
 
-  playerMessageClass.textContent = `Your score: ${yourScoreValue()}`
-  dealerMessageClass.textContent = `Dealer score: ${dealerScoreValue()}`
+  playerScoreElement.textContent = `Your score: ${yourScoreValue()}`
+  dealerScoreElement.textContent = `Dealer score: ${dealerScoreValue()}`
+  // if(yourScoreValue() > 21){
+  //   playerMessageClass.textContent = 'You bust!'
+  // }
+
   const cardContainer = document.querySelector('.cards-container')
   const image1 = document.createElement('div')
   image1.setAttribute('class', 'card hearts r02')
@@ -153,3 +175,20 @@ const render = function() {
   cardContainer.appendChild(image4)
 }
 render()
+
+const playerHit = function(event) {
+  const dealtCards = playerCards.length + dealerCards.length
+  playerCards.push(deckOfCards[dealtCards])
+  if (yourScoreValue() > 21) {
+    gameState = DEALER_WON
+  }
+
+  render()
+
+  console.log(playerCards)
+  console.log(dealerCards)
+  console.log(gameState)
+}
+
+const hitButton = document.querySelector('.hit')
+hitButton.addEventListener('click', playerHit)

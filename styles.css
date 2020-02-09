@@ -45,6 +45,11 @@ html {
   justify-content: center;
 }
 
+.winner-container {
+  display: flex;
+  justify-content: center;
+}
+
 .row-container {
   display: flex;
   justify-content: center;
