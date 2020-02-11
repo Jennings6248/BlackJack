@@ -18,18 +18,18 @@ const CLUBS = 'clubs'
 const suits = [HEARTS, SPADES, DIAMONDS, CLUBS]
 
 const TWO = 'r02'
-const THREE = 'three'
-const FOUR = 'four'
-const FIVE = 'five'
-const SIX = 'six'
-const SEVEN = 'seven'
-const EIGHT = 'eight'
-const NINE = 'nine'
-const TEN = 'ten'
-const JACK = 'jack'
-const QUEEN = 'queen'
-const KING = 'king'
-const ACE = 'ace'
+const THREE = 'r03'
+const FOUR = 'r04'
+const FIVE = 'r05'
+const SIX = 'r06'
+const SEVEN = 'r07'
+const EIGHT = 'r08'
+const NINE = 'r09'
+const TEN = 'r10'
+const JACK = 'J'
+const QUEEN = 'Q'
+const KING = 'K'
+const ACE = 'A'
 
 const ranks = [
   TWO,
@@ -47,8 +47,6 @@ const ranks = [
   ACE,
 ]
 
-
-
 const deckOfCards = []
 suits.forEach(function(suit) {
   suit
@@ -64,6 +62,8 @@ suits.forEach(function(suit) {
     //console.log(deckOfCards)
   })
 })
+
+
 
 //console.log(playerCards)
 playerCards.push(deckOfCards[0])
@@ -144,6 +144,8 @@ const dealerScoreValue = function() {
 }
 
 //console.log(yourScoreValue())
+const cardContainer = document.querySelector('.cards-container')
+
 
 const render = function() {
   const playerScoreElement = document.querySelector('.player-score')
@@ -156,30 +158,28 @@ const render = function() {
   if (gameState === DEALER_WON) {
     winOrLostMessage.textContent = `Dealer Wins!!`
   }
+  
+   cardContainer.innerHTML =''
 
-  const cardContainer = document.querySelector('.cards-container')
-  const image1 = document.createElement('div')
-  image1.setAttribute('class', 'card hearts r02')
-  cardContainer.appendChild(image1)
 
-  const image2 = document.createElement('div')
-  image2.setAttribute('class', 'card hearts r03')
-  cardContainer.appendChild(image2)
+  playerCards.forEach(function(card) {
+    const image1 = document.createElement('div')
+    image1.setAttribute('class', `card ${card.suit} ${card.rank}`)
+    cardContainer.appendChild(image1)
+  })
 
-  const image3 = document.createElement('div')
-  image3.setAttribute('class', 'card hearts r04')
-  cardContainer.appendChild(image3)
-
-  const image4 = document.createElement('div')
-  image4.setAttribute('class', 'card hearts r05')
-  cardContainer.appendChild(image4)
+  dealerCards.forEach(function(card) {
+    const image2 = document.createElement('div')
+    image2.setAttribute('class', `card ${card.suit} ${card.rank}`)
+    cardContainer.appendChild(image2)
+  })
 }
 render()
 
 const playerHit = function(event) {
   const dealtCards = playerCards.length + dealerCards.length
   playerCards.push(deckOfCards[dealtCards])
-  
+
   console.log(dealtCards)
   if (yourScoreValue() > 21) {
     gameState = DEALER_WON
@@ -194,8 +194,6 @@ const playerHit = function(event) {
 
 const hitButton = document.querySelector('.hit')
 hitButton.addEventListener('click', playerHit)
-
-
 
 // playerCards.push(randomCardSelector(deckOfCards))
 // playerCards.push(randomCardSelector(deckOfCards))
