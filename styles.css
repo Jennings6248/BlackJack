@@ -45,6 +45,10 @@ html {
   justify-content: center;
 }
 
+.winner-message {
+  font-size: 50px;
+}
+
 .winner-container {
   display: flex;
   justify-content: center;

@@ -1,5 +1,6 @@
 const playerCards = []
 const dealerCards = []
+//console.log(playerCards)
 
 const YOUR_TURN = 'your turn'
 const DEALER_TURN = 'dealer turn'
@@ -46,6 +47,8 @@ const ranks = [
   ACE,
 ]
 
+
+
 const deckOfCards = []
 suits.forEach(function(suit) {
   suit
@@ -62,6 +65,7 @@ suits.forEach(function(suit) {
   })
 })
 
+//console.log(playerCards)
 playerCards.push(deckOfCards[0])
 playerCards.push(deckOfCards[1])
 
@@ -125,8 +129,8 @@ const yourScoreValue = function() {
   const playerSum = playerCards.reduce(function(total, card) {
     return total + rankToNumber(card.rank)
   }, 0)
-  console.log(playerCards)
-  console.log(playerSum)
+  //console.log(playerCards)
+  // console.log(playerSum)
 
   return playerSum
 }
@@ -141,21 +145,17 @@ const dealerScoreValue = function() {
 
 //console.log(yourScoreValue())
 
-const youLose = function() {
-  if (yourScoreValue() > 21) {
-    return (playerMessageClass.textContent = 'You bust!')
-  }
-}
-
 const render = function() {
   const playerScoreElement = document.querySelector('.player-score')
   const dealerScoreElement = document.querySelector('.dealer-score')
+  const winOrLostMessage = document.querySelector('.winner-message')
 
   playerScoreElement.textContent = `Your score: ${yourScoreValue()}`
   dealerScoreElement.textContent = `Dealer score: ${dealerScoreValue()}`
-  // if(yourScoreValue() > 21){
-  //   playerMessageClass.textContent = 'You bust!'
-  // }
+
+  if (gameState === DEALER_WON) {
+    winOrLostMessage.textContent = `Dealer Wins!!`
+  }
 
   const cardContainer = document.querySelector('.cards-container')
   const image1 = document.createElement('div')
@@ -179,6 +179,8 @@ render()
 const playerHit = function(event) {
   const dealtCards = playerCards.length + dealerCards.length
   playerCards.push(deckOfCards[dealtCards])
+  
+  console.log(dealtCards)
   if (yourScoreValue() > 21) {
     gameState = DEALER_WON
   }
@@ -186,9 +188,16 @@ const playerHit = function(event) {
   render()
 
   console.log(playerCards)
-  console.log(dealerCards)
+  //console.log(dealerCards)
   console.log(gameState)
 }
 
 const hitButton = document.querySelector('.hit')
 hitButton.addEventListener('click', playerHit)
+
+
+
+// playerCards.push(randomCardSelector(deckOfCards))
+// playerCards.push(randomCardSelector(deckOfCards))
+// console.log(randomCardSelector(deckOfCards))
+// console.log(deckOfCards)
