@@ -47,7 +47,7 @@ const ranks = [
   ACE,
 ]
 
-const deckOfCards = []
+let deckOfCards = []
 suits.forEach(function(suit) {
   suit
   ranks.forEach(function(rank) {
@@ -63,7 +63,16 @@ suits.forEach(function(suit) {
   })
 })
 
-
+// referenced from Jim Clark Repl
+function shuffledDeck() {
+  let tempDeck = deckOfCards.slice()
+  deckOfCards = []
+  while (tempDeck.length) {
+    let rndIdx = Math.floor(Math.random() * tempDeck.length)
+    deckOfCards.push(tempDeck.splice(rndIdx, 1)[0])
+  }
+}
+shuffledDeck()
 
 //console.log(playerCards)
 playerCards.push(deckOfCards[0])
@@ -146,7 +155,6 @@ const dealerScoreValue = function() {
 //console.log(yourScoreValue())
 const cardContainer = document.querySelector('.cards-container')
 
-
 const render = function() {
   const playerScoreElement = document.querySelector('.player-score')
   const dealerScoreElement = document.querySelector('.dealer-score')
@@ -158,9 +166,8 @@ const render = function() {
   if (gameState === DEALER_WON) {
     winOrLostMessage.textContent = `Dealer Wins!!`
   }
-  
-   cardContainer.innerHTML =''
 
+  cardContainer.innerHTML = ''
 
   playerCards.forEach(function(card) {
     const image1 = document.createElement('div')
