@@ -65,11 +65,11 @@ suits.forEach(function(suit) {
 
 // referenced from Jim Clark Repl
 function shuffledDeck() {
-  let tempDeck = deckOfCards.slice()
+  let newDeck = deckOfCards.slice()
   deckOfCards = []
-  while (tempDeck.length) {
-    let rndIdx = Math.floor(Math.random() * tempDeck.length)
-    deckOfCards.push(tempDeck.splice(rndIdx, 1)[0])
+  while (newDeck.length) {
+    let randomNumber = Math.floor(Math.random() * newDeck.length)
+    deckOfCards.push(newDeck.splice(randomNumber, 1)[0])
   }
 }
 shuffledDeck()
@@ -117,6 +117,7 @@ const rankToNumber = function(cardRank) {
       return 11
     }
   })
+  //console.log(cardRank)
   //console.log(rankedValue)
   const indexOfRank = ranks.findIndex(function(rank) {
     return rank === cardRank
@@ -173,12 +174,14 @@ const render = function() {
     const image1 = document.createElement('div')
     image1.setAttribute('class', `card ${card.suit} ${card.rank}`)
     cardContainer.appendChild(image1)
+    console.log(cardContainer.innerHTML)
   })
 
   dealerCards.forEach(function(card) {
     const image2 = document.createElement('div')
     image2.setAttribute('class', `card ${card.suit} ${card.rank}`)
     cardContainer.appendChild(image2)
+    console.log(cardContainer.innerHTML)
   })
 }
 render()
