@@ -1,4 +1,13 @@
 # BlackJack
+
+Technologies used: HTML, CSS and JavaScript
+
+Description: The player will then be dealt 2 cards face up; the Dealer will also be dealt 2 cards but only one card will be placed face up, the other will be placed face down. The Player must now decide whether to take another card (hit), or to stick with the cards they have. Once Players have decided on their play, the Dealer will only then decide how to play their hand.
+
+The goal of twenty one is simple; beat the house`s combination by acquiring a combined card count of 21 or under. Aces are valued as either 1 or eleven, picture cards Kings, Queens and Jacks have a card count of ten, and all cards are given their numeric face value, i.e. 7 is valued as 7 points, 2 is valued at 2 points… etc.
+
+If the Player’s total goes over 21, the Player loses the amount wagered.
+
 ![BlackJack wireframe](./images/84622717_10223153617735822_3536704834369486848_n.jpg)
 
 ```1. Initialize state variables
