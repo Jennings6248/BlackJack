@@ -6,7 +6,7 @@ Description: The player will then be dealt 2 cards face up; the Dealer will also
 
 The goal of twenty one is simple; beat the house`s combination by acquiring a combined card count of 21 or under. Aces are valued as either 1 or eleven, picture cards Kings, Queens and Jacks have a card count of ten, and all cards are given their numeric face value, i.e. 7 is valued as 7 points, 2 is valued at 2 points… etc.
 
-If the Player’s total goes over 21, the Player loses the amount wagered.
+If the Player’s total goes over 21, the Player loses.
 
 ![BlackJack wireframe](./images/84622717_10223153617735822_3536704834369486848_n.jpg)
 
