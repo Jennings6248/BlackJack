@@ -161,8 +161,10 @@ const dealerScoreValue = function() {
 }
 
 //console.log(yourScoreValue())
+const mainContainer = document.querySelector('.main-container')
 const cardContainer = document.querySelector('.cards-container')
-
+const dealerContainer = document.querySelector('.cards-container2')
+console.log(mainContainer)
 const render = function() {
   const playerScoreElement = document.querySelector('.player-score')
   const dealerScoreElement = document.querySelector('.dealer-score')
