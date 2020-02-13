@@ -81,11 +81,10 @@ playerCards.push(deckOfCards[1])
 dealerCards.push(deckOfCards[2])
 dealerCards.push(deckOfCards[3])
 
-//console.log(dealerCards)
-// console.log(playerCards)
-// console.log(dealerCards)
-
-// console.log(playerCards[0].rank)
+const getNextCardFromDeck = function() {
+  const dealtCards = playerCards.length + dealerCards.length
+  return deckOfCards[dealtCards]
+}
 
 const rankToNumber = function(cardRank) {
   const rankedValue = ranks.map(function(rank) {
@@ -145,6 +144,14 @@ const yourScoreValue = function() {
   return playerSum
 }
 
+const showDealerScoreValue = function() {
+  if (gameState === YOUR_TURN) {
+    return dealerScoreValue() - rankToNumber(dealerCards[0].rank)
+  } else {
+    return dealerScoreValue()
+  }
+}
+
 const dealerScoreValue = function() {
   const dealerSum = dealerCards.reduce(function(total, card) {
     return total + rankToNumber(card.rank)
@@ -162,10 +169,14 @@ const render = function() {
   const winOrLostMessage = document.querySelector('.winner-message')
 
   playerScoreElement.textContent = `Your score: ${yourScoreValue()}`
-  dealerScoreElement.textContent = `Dealer score: ${dealerScoreValue()}`
+  dealerScoreElement.textContent = `Dealer score: ${showDealerScoreValue()}`
 
   if (gameState === DEALER_WON) {
     winOrLostMessage.textContent = `Dealer Wins!!`
+  } else if (gameState === PLAYER_WON) {
+    winOrLostMessage.textContent = 'Player Wins!!'
+  } else if (gameState === TIE) {
+    winOrLostMessage.textContent = 'TIE'
   }
 
   cardContainer.innerHTML = ''
@@ -174,36 +185,62 @@ const render = function() {
     const image1 = document.createElement('div')
     image1.setAttribute('class', `card ${card.suit} ${card.rank}`)
     cardContainer.appendChild(image1)
-    console.log(cardContainer.innerHTML)
+    //console.log(cardContainer.innerHTML)
   })
 
-  dealerCards.forEach(function(card) {
-    const image2 = document.createElement('div')
-    image2.setAttribute('class', `card ${card.suit} ${card.rank}`)
-    cardContainer.appendChild(image2)
-    console.log(cardContainer.innerHTML)
+  dealerCards.forEach(function(card, i) {
+    if (i === 0 && gameState === YOUR_TURN) {
+      const image2 = document.createElement('div')
+      image2.setAttribute('class', `card back-red`)
+      cardContainer.appendChild(image2)
+    } else {
+      const image2 = document.createElement('div')
+      image2.setAttribute('class', `card ${card.suit} ${card.rank}`)
+      cardContainer.appendChild(image2)
+      // console.log(cardContainer.innerHTML)
+    }
   })
 }
 render()
 
 const playerHit = function(event) {
+  if (gameState !== YOUR_TURN) {
+    return
+  }
   const dealtCards = playerCards.length + dealerCards.length
   playerCards.push(deckOfCards[dealtCards])
 
-  console.log(dealtCards)
+  //console.log(dealtCards)
   if (yourScoreValue() > 21) {
     gameState = DEALER_WON
   }
 
   render()
 
-  console.log(playerCards)
+  //console.log(playerCards)
   //console.log(dealerCards)
-  console.log(gameState)
+  //console.log(gameState)
 }
 
+const standButton = document.querySelector('.stand')
 const hitButton = document.querySelector('.hit')
 hitButton.addEventListener('click', playerHit)
+standButton.addEventListener('click', function(e) {
+  gameState = DEALER_TURN
+
+  while (dealerScoreValue() < yourScoreValue()) {
+    dealerCards.push(getNextCardFromDeck())
+  }
+  if (dealerScoreValue() > yourScoreValue() && dealerScoreValue() <= 21) {
+    gameState = DEALER_WON
+  } else if (dealerScoreValue() > 21) {
+    gameState = PLAYER_WON
+  } else {
+    gameState = TIE
+  }
+  render()
+  console.log({gameState, playerCards, dealerCards})
+})
 
 // playerCards.push(randomCardSelector(deckOfCards))
 // playerCards.push(randomCardSelector(deckOfCards))
