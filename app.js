@@ -83,10 +83,8 @@ dealerCards.push(deckOfCards[3])
 
 const getNextCardFromDeck = function() {
   const dealtCards = playerCards.length + dealerCards.length
-   return deckOfCards[dealtCards]
+  return deckOfCards[dealtCards]
 }
-
-
 
 const rankToNumber = function(cardRank) {
   const rankedValue = ranks.map(function(rank) {
@@ -147,14 +145,11 @@ const yourScoreValue = function() {
 }
 
 const showDealerScoreValue = function() {
-  if(gameState === YOUR_TURN) {
+  if (gameState === YOUR_TURN) {
     return dealerScoreValue() - rankToNumber(dealerCards[0].rank)
-  }else {
+  } else {
     return dealerScoreValue()
   }
- 
-
- 
 }
 
 const dealerScoreValue = function() {
@@ -178,9 +173,9 @@ const render = function() {
 
   if (gameState === DEALER_WON) {
     winOrLostMessage.textContent = `Dealer Wins!!`
-  } else if(gameState === PLAYER_WON){
+  } else if (gameState === PLAYER_WON) {
     winOrLostMessage.textContent = 'Player Wins!!'
-  }else if(gameState === TIE) {
+  } else if (gameState === TIE) {
     winOrLostMessage.textContent = 'TIE'
   }
 
@@ -194,22 +189,22 @@ const render = function() {
   })
 
   dealerCards.forEach(function(card, i) {
-    if(i === 0 && gameState === YOUR_TURN) {
+    if (i === 0 && gameState === YOUR_TURN) {
       const image2 = document.createElement('div')
       image2.setAttribute('class', `card back-red`)
       cardContainer.appendChild(image2)
-    }else {
-    const image2 = document.createElement('div')
-    image2.setAttribute('class', `card ${card.suit} ${card.rank}`)
-    cardContainer.appendChild(image2)
-    // console.log(cardContainer.innerHTML)
+    } else {
+      const image2 = document.createElement('div')
+      image2.setAttribute('class', `card ${card.suit} ${card.rank}`)
+      cardContainer.appendChild(image2)
+      // console.log(cardContainer.innerHTML)
     }
   })
 }
 render()
 
 const playerHit = function(event) {
-  if(gameState !== YOUR_TURN){
+  if (gameState !== YOUR_TURN) {
     return
   }
   const dealtCards = playerCards.length + dealerCards.length
@@ -233,9 +228,6 @@ hitButton.addEventListener('click', playerHit)
 standButton.addEventListener('click', function(e) {
   gameState = DEALER_TURN
 
-  
-
-
   while (dealerScoreValue() < yourScoreValue()) {
     dealerCards.push(getNextCardFromDeck())
   }
@@ -246,7 +238,7 @@ standButton.addEventListener('click', function(e) {
   } else {
     gameState = TIE
   }
-   render()
+  render()
   console.log({gameState, playerCards, dealerCards})
 })
 
